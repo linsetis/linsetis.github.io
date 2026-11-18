@@ -48,17 +48,20 @@ export function initMotion() {
   // CurvePath: прорисовка при скролле
   document.querySelectorAll<SVGSVGElement>('svg[data-curve]').forEach((svg) => {
     const path = svg.querySelector('path')!;
+    let tween: gsap.core.Tween | null = null;
     const setup = () => {
       const len = path.getTotalLength();
       if (!len) return;
-      gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-      ScrollTrigger.getById(svg.id || 'x')?.kill();
-      gsap.to(path, {
+      const progress = tween?.scrollTrigger?.progress ?? 0;
+      tween?.scrollTrigger?.kill();
+      tween?.kill();
+      gsap.set(path, { strokeDasharray: len, strokeDashoffset: len * (1 - progress) });
+      tween = gsap.to(path, {
         strokeDashoffset: 0, ease: 'none',
         scrollTrigger: { trigger: svg.parentElement, start: 'top 70%', end: 'bottom 70%', scrub: 0.6 },
       });
     };
-    svg.addEventListener('curve:built', () => { setup(); ScrollTrigger.refresh(); }, { once: true });
+    svg.addEventListener('curve:built', setup);
     setup();
   });
 

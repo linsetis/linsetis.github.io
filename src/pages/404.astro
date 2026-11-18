@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import PuffyLogo from '../components/PuffyLogo.astro';
+import ArrowButton from '../components/ArrowButton.astro';
+import Starburst from '../components/Starburst.astro';
+---
+<BaseLayout title="404">
+  <section class="section section--pink grain nf">
+    <Nav />
+    <main id="main" class="nf__main">
+      <Starburst size={120} seed={404} class="nf__star nf__star--a" />
+      <Starburst size={64} seed={13} class="nf__star nf__star--b" />
+      <div class="nf__logo" data-reveal>
+        <PuffyLogo text="404" tag="h1" marks={false} label="404 — страница не найдена" />
+      </div>
+      <p class="micro nf__cap">: КИКС. ТАКОЙ СТРАНИЦЫ НЕТ</p>
+      <ArrowButton href="/" label="НА ГЛАВНУЮ" />
+    </main>
+  </section>
+</BaseLayout>
+<style>
+  .nf { min-height: calc(100vh - var(--outer) * 2); display: flex; flex-direction: column; }
+  .nf__main { position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: clamp(24px, 4vw, 40px); padding-top: 40px; }
+  .nf__logo { width: min(100%, 720px); margin-inline: auto; }
+  .nf__cap { text-align: center; color: var(--black); }
+  .nf__star { position: absolute; z-index: 1; }
+  .nf__star--a { top: 6%; right: 6%; }
+  .nf__star--b { bottom: 28%; left: 4%; }
+</style>

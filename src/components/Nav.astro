@@ -1,0 +1,104 @@
+---
+import HandHeart from './HandHeart.astro';
+import Starburst from './Starburst.astro';
+import { nav } from '../data/site';
+import { url } from '../lib/url';
+---
+<nav class="nav" aria-label="Основная навигация">
+  <div class="nav__left">
+    <ul class="nav__list micro">
+      {nav.map((l) => <li><a href={url(l.href)}>{l.label}</a></li>)}
+    </ul>
+    <HandHeart class="nav__hand" />
+  </div>
+  <div class="nav__right">
+    <a class="nav__cta micro" href={url('/#contacts')}>НАПИСАТЬ</a>
+    <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-overlay" data-nav-toggle>
+      <span class="visually-hidden">Открыть меню</span>
+      <Starburst size={44} seed={23} spin={false} />
+    </button>
+  </div>
+
+  <div class="nav__overlay" id="nav-overlay" data-nav-overlay hidden>
+    <button class="nav__close micro" type="button" data-nav-close>ЗАКРЫТЬ ✕</button>
+    <ul class="nav__big">
+      {nav.map((l, i) => (
+        <li style={`--r:${[-3, 2, -1, 3, -2][i % 5]}deg`}>
+          <span class="micro">0{i + 1}</span>
+          <a class="h" href={url(l.href)}>{l.label}</a>
+        </li>
+      ))}
+    </ul>
+    <Starburst size={120} seed={31} class="nav__ostar" />
+    <HandHeart size={48} class="nav__ohand" />
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: relative; z-index: 5;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+  }
+  .nav__left { display: flex; align-items: flex-end; gap: 14px; }
+  .nav__list { display: flex; flex-direction: column; gap: 3px; }
+  .nav__list a { text-decoration: none; }
+  .nav__list a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .nav__hand { margin-bottom: -2px; }
+  .nav__right { display: flex; align-items: center; gap: 12px; }
+  .nav__cta {
+    display: inline-block; background: var(--black); color: var(--pink);
+    padding: 9px 14px 8px; text-decoration: none; rotate: 2deg; border-radius: 3px;
+    transition: rotate var(--t-fast) var(--ease-spring);
+  }
+  .nav__cta:hover { rotate: -1deg; }
+  .nav__burger { display: none; background: none; border: 0; padding: 0; cursor: pointer; }
+
+  .nav__overlay {
+    position: fixed; inset: 0; z-index: 900;
+    background: var(--pink); color: var(--black);
+    padding: 72px 24px 32px; overflow-y: auto;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .nav__overlay[hidden] { display: none; }
+  .nav__close {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--black); color: var(--pink); border: 0; padding: 9px 12px; cursor: pointer;
+  }
+  .nav__big { display: flex; flex-direction: column; gap: 14px; }
+  .nav__big li { display: flex; align-items: baseline; gap: 12px; rotate: var(--r); }
+  .nav__big a { text-decoration: none; font-size: clamp(40px, 12vw, 64px); }
+  .nav__ostar { position: absolute; right: -24px; bottom: 60px; }
+  .nav__ohand { position: absolute; left: 24px; bottom: 24px; }
+
+  @media (max-width: 767px) {
+    .nav__left { display: none; }
+    .nav { justify-content: flex-end; }
+    .nav__burger { display: block; }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const overlay = document.querySelector<HTMLElement>('[data-nav-overlay]');
+  const closeBtn = document.querySelector<HTMLButtonElement>('[data-nav-close]');
+  if (toggle && overlay) {
+    const setOpen = (open: boolean) => {
+      overlay.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+      if (open) overlay.querySelector<HTMLElement>('a')?.focus();
+      else toggle.focus({ preventScroll: true });
+    };
+    toggle.addEventListener('click', () => setOpen(overlay.hasAttribute('hidden')));
+    closeBtn?.addEventListener('click', () => setOpen(false));
+    overlay.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+      overlay.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      document.documentElement.style.overflow = '';
+    }));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.hidden) setOpen(false);
+    });
+    window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => { if (e.matches && !overlay.hidden) setOpen(false); });
+  }
+</script>

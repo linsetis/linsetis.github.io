@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PhotoFrame from '../../components/PhotoFrame.astro';
+import Tag from '../../components/Tag.astro';
+import Starburst from '../../components/Starburst.astro';
+import { projects, type Project } from '../../data/projects';
+import { url } from '../../lib/url';
+
+export function getStaticPaths() {
+  return projects.map((project, i) => ({
+    params: { slug: project.slug },
+    props: { project, next: projects[(i + 1) % projects.length], index: i },
+  }));
+}
+
+interface Props { project: Project; next: Project; index: number; }
+const { project, next, index } = Astro.props;
+const tilts = [-4, 3, -2, 5, -3, 2];
+const num = String(index + 1).padStart(2, '0');
+---
+<BaseLayout title={project.title} description={`${project.title} — ${project.summary}. ${project.role}.`}>
+  <section class="section section--pink grain ph">
+    <Nav />
+    <main id="main">
+      <header class="ph__head grid">
+        <p class="micro ph__num">: ПРОЕКТ {num} / {String(projects.length).padStart(2, '0')}</p>
+        <h1 class="h h--display ph__title" data-reveal>{project.title}</h1>
+        <dl class="ph__meta micro">
+          <div><dt>ГОД</dt><dd>{project.year}</dd></div>
+          <div><dt>КЛИЕНТ</dt><dd>{project.client}</dd></div>
+          <div><dt>РОЛЬ</dt><dd>{project.role}</dd></div>
+          <div class="ph__tags">
+            <dt>ТЕГИ</dt>
+            <dd>{project.tags.map((t, i) => <Tag variant={i % 2 ? 'white' : 'black'} rotate={i % 2 ? 2 : -2}>{t}</Tag>)}</dd>
+          </div>
+        </dl>
+      </header>
+
+      <div class="ph__body grid">
+        <div class="ph__cover" data-reveal>
+          <PhotoFrame src={project.cover.src} alt={project.cover.alt} ratio={project.cover.ratio} rotate={-2} loading="eager" caption={`: ${project.summary}`} />
+          <Starburst size={96} seed={index * 5 + 3} class="ph__star" />
+        </div>
+        <div class="note ph__note" data-reveal="0.1">
+          {project.description.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <section class="section section--black grain pg" aria-label="Галерея проекта">
+    <h2 class="micro pg__label">: ГАЛЕРЕЯ · КАДРОВ: {project.gallery.length}</h2>
+    <ul class="pg__grid">
+      {project.gallery.map((img, i) => (
+        <li class:list={['pg__item', `pg__item--${i % 4}`]} data-parallax={String(0.08 + (i % 3) * 0.06)}>
+          <div data-reveal>
+            <PhotoFrame src={img.src} alt={img.alt} ratio={img.ratio} rotate={tilts[i % tilts.length]} gray={i === 2} caption={`${String(i + 1).padStart(2, '0')} : ${img.alt}`} />
+          </div>
+        </li>
+      ))}
+    </ul>
+    <Starburst size={140} seed={index + 90} class="pg__star" />
+
+    <nav class="pg__nav" aria-label="Навигация по проектам">
+      <a class="pg__btn pg__btn--back" href={url('/#projects')}>← ВСЕ ПРОЕКТЫ</a>
+      <a class="pg__btn pg__btn--next" href={url(`/projects/${next.slug}/`)}>
+        <span class="micro micro--sm">СЛЕДУЮЩИЙ →</span>
+        <span class="pg__next-title">{next.title}</span>
+      </a>
+    </nav>
+  </section>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .ph__head { margin-top: clamp(32px, 6vw, 72px); row-gap: 20px; align-items: end; }
+  .ph__num { grid-column: 1 / -1; }
+  .ph__title { grid-column: 1 / span 8; overflow-wrap: anywhere; }
+  .ph__meta { grid-column: 9 / span 4; display: grid; gap: 10px; margin: 0; }
+  .ph__meta div { display: grid; grid-template-columns: 7ch 1fr; gap: 8px; border-top: 1px solid var(--black); padding-top: 6px; }
+  .ph__meta dt { opacity: 1; }
+  .ph__meta dd { margin: 0; }
+  .ph__tags dd { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ph__tags :global(.tag) { font-size: 12px; }
+
+  .ph__body { margin-top: clamp(40px, 6vw, 80px); row-gap: 32px; align-items: start; }
+  .ph__cover { grid-column: 1 / span 8; position: relative; }
+  .ph__star { position: absolute; right: -36px; top: -40px; z-index: 2; }
+  .ph__note { grid-column: 9 / span 4; justify-self: start; rotate: 2deg; margin-top: clamp(0px, 8vw, 120px); margin-left: -40px; position: relative; z-index: 3; display: flex; flex-direction: column; gap: 12px; }
+
+  .pg { position: relative; }
+  .pg__label { color: var(--pink); margin-bottom: clamp(24px, 4vw, 48px); font-weight: 400; }
+  .pg__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: clamp(24px, 4vw, 48px); position: relative; z-index: 1; }
+  .pg__item { position: relative; }
+  .pg__item--0 { grid-column: 1 / span 6; }
+  .pg__item--1 { grid-column: 7 / span 6; margin-top: clamp(40px, 10vw, 140px); }
+  .pg__item--2 { grid-column: 2 / span 5; margin-top: -60px; }
+  .pg__item--3 { grid-column: 6 / span 7; margin-top: 20px; }
+  .pg__star { position: absolute; right: 6%; top: 40%; z-index: 2; }
+
+  .pg__nav { position: relative; z-index: 3; margin-top: clamp(48px, 8vw, 100px); display: flex; justify-content: space-between; align-items: stretch; gap: 16px; flex-wrap: wrap; }
+  .pg__btn { text-decoration: none; display: inline-flex; flex-direction: column; justify-content: center; gap: 6px; padding: 14px 18px; transition: rotate var(--t-mid) var(--ease-spring), translate var(--t-mid) var(--ease-spring); }
+  .pg__btn--back { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; background: var(--pink); color: var(--black); rotate: -2deg; }
+  .pg__btn--next { background: var(--white); color: var(--black); rotate: 2deg; align-items: flex-end; text-align: right; }
+  .pg__next-title { font-family: var(--font-head); font-size: var(--fs-h-sm); line-height: var(--lh-h); text-transform: uppercase; }
+  .pg__btn:hover { rotate: 0deg; translate: 0 -3px; }
+
+  @media (max-width: 820px) {
+    .ph__title, .ph__meta, .ph__cover, .ph__note { grid-column: 1 / -1; }
+    .ph__note { margin: -24px 0 0 auto; max-width: min(calc(22ch + 40px), 90%); }
+    .ph__star { right: -8px; top: -30px; }
+    .pg__item--0, .pg__item--1, .pg__item--2, .pg__item--3 { grid-column: 1 / -1; margin-top: 0; }
+    .pg__item:nth-child(odd) { padding-right: 8%; }
+    .pg__item:nth-child(even) { padding-left: 8%; }
+    .pg__star { top: auto; bottom: 120px; right: 0; }
+  }
+</style>

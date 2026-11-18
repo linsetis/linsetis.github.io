@@ -1,0 +1,130 @@
+---
+// Карточка-«комната»: большое фото в белой рамке + наложенная розовая записка.
+// Позиция в коллаже задаётся data-pos (0–3) на <li>; Projects.astro пересчитывает её после фильтрации.
+import PhotoFrame from './PhotoFrame.astro';
+import Starburst from './Starburst.astro';
+import type { Project } from '../data/projects';
+import { url } from '../lib/url';
+
+interface Props { project: Project; index: number; }
+const { project, index } = Astro.props;
+const num = String(index + 1).padStart(2, '0');
+---
+<li class="pitem" data-project data-pos={index % 4} data-categories={project.categories.join(' ')}>
+  <a class="pcard" href={url(`/projects/${project.slug}`)}>
+    <div class="pcard__photo">
+      <PhotoFrame src={project.cover.src} alt={project.cover.alt} ratio={project.cover.ratio ?? 4 / 3} hover={false} />
+    </div>
+    <div class="pcard__label">
+      <span class="pcard__num micro micro--sm">№ {num} · {project.year}</span>
+      <h3 class="pcard__title h h--sm">{project.title}</h3>
+      <p class="pcard__desc micro">: {project.summary}</p>
+      <span class="pcard__more micro micro--sm" aria-hidden="true">СМОТРЕТЬ →</span>
+    </div>
+  </a>
+  <Starburst class="pcard__star" size={index % 2 ? 72 : 96} seed={index * 13 + 5} />
+</li>
+
+<style>
+  .pitem {
+    position: relative;
+    z-index: 1;
+    grid-column: 1 / 9;
+    --tilt: -2deg;
+    --label-tilt: 2deg;
+  }
+  .pitem[hidden] { display: none !important; }
+  .pitem:hover, .pitem:focus-within { z-index: 5; }
+
+  /* Варианты позиции в коллаже */
+  .pitem[data-pos='0'] { grid-column: 1 / 9; --tilt: -2.5deg; --label-tilt: 2deg; }
+  .pitem[data-pos='1'] { grid-column: 5 / 13; --tilt: 2deg; --label-tilt: -3deg; }
+  .pitem[data-pos='2'] { grid-column: 2 / 10; --tilt: -1.5deg; --label-tilt: 3deg; }
+  .pitem[data-pos='3'] { grid-column: 5 / 13; --tilt: 3deg; --label-tilt: -2deg; }
+  .pitem:not([hidden]) ~ .pitem { margin-top: clamp(-180px, -13vw, -80px); }
+
+  .pcard {
+    position: relative;
+    display: block;
+    color: var(--black);
+    text-decoration: none;
+    outline-offset: 8px;
+  }
+  .pcard:focus-visible { outline-color: var(--pink); }
+
+  .pcard__photo {
+    rotate: var(--tilt);
+    transition: rotate var(--t-mid) var(--ease-spring), translate var(--t-mid) var(--ease-spring);
+  }
+  .pcard:hover .pcard__photo,
+  .pcard:focus-visible .pcard__photo { rotate: 0deg; translate: 0 -6px; }
+
+  .pcard__label {
+    position: absolute;
+    z-index: 2;
+    width: min(300px, 52%);
+    background: var(--pink);
+    color: var(--black);
+    padding: 16px 18px 18px;
+    rotate: var(--label-tilt);
+    display: grid;
+    gap: 8px;
+    box-shadow: 0 14px 28px -16px rgb(14 14 14 / 0.7);
+    transition: rotate var(--t-mid) var(--ease-spring), translate var(--t-mid) var(--ease-spring);
+  }
+  .pitem[data-pos='0'] .pcard__label,
+  .pitem[data-pos='2'] .pcard__label { right: -16%; bottom: 10%; }
+  .pitem[data-pos='1'] .pcard__label,
+  .pitem[data-pos='3'] .pcard__label { left: -16%; bottom: 14%; }
+  .pcard:hover .pcard__label,
+  .pcard:focus-visible .pcard__label { rotate: 0deg; translate: 0 -4px; }
+
+  .pcard__title { overflow-wrap: anywhere; }
+  .pcard__desc { max-width: 30ch; }
+  .pcard__more {
+    justify-self: start;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+
+  /* Звезда «на стыке» */
+  .pitem :global(.pcard__star) { position: absolute; z-index: 3; pointer-events: none; }
+  .pitem[data-pos='0'] :global(.pcard__star) { left: -3%; top: -4%; }
+  .pitem[data-pos='1'] :global(.pcard__star) { right: -2%; top: -6%; }
+  .pitem[data-pos='2'] :global(.pcard__star) { right: 4%; top: -7%; }
+  .pitem[data-pos='3'] :global(.pcard__star) { left: -5%; top: 2%; }
+
+  /* Планшет: меньше выносим записки за край */
+  @media (max-width: 1024px) {
+    .pitem[data-pos='0'] .pcard__label,
+    .pitem[data-pos='2'] .pcard__label { right: -8%; }
+    .pitem[data-pos='1'] .pcard__label,
+    .pitem[data-pos='3'] .pcard__label { left: -8%; }
+    .pitem[data-pos='0'], .pitem[data-pos='2'] { grid-column: 1 / 10; }
+    .pitem[data-pos='1'], .pitem[data-pos='3'] { grid-column: 4 / 13; }
+  }
+
+  /* Мобильный: колонка с небольшим перекрытием, записка под фото внахлёст */
+  @media (max-width: 720px) {
+    .pitem[data-pos] { grid-column: 1 / -1; }
+    .pitem:not([hidden]) ~ .pitem { margin-top: 28px; }
+    .pcard__photo { width: 92%; }
+    .pitem[data-pos='1'] .pcard__photo,
+    .pitem[data-pos='3'] .pcard__photo { margin-left: 8%; }
+    .pitem[data-pos] .pcard__label {
+      position: relative;
+      inset: auto;
+      width: 82%;
+      margin-top: -36px;
+      margin-left: auto;
+    }
+    .pitem[data-pos='1'] .pcard__label,
+    .pitem[data-pos='3'] .pcard__label { margin-left: 0; }
+    .pitem :global(.pcard__star) { width: 56px; height: 56px; }
+    .pitem[data-pos] :global(.pcard__star) { top: -18px; }
+    .pitem[data-pos='0'] :global(.pcard__star),
+    .pitem[data-pos='2'] :global(.pcard__star) { left: auto; right: 0; }
+    .pitem[data-pos='1'] :global(.pcard__star),
+    .pitem[data-pos='3'] :global(.pcard__star) { right: auto; left: 0; }
+  }
+</style>

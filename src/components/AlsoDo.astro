@@ -1,0 +1,160 @@
+---
+// Секция 4 — «ЗДЕСЬ ТАКЖЕ ДЕЛАЮ» / услуги. Переход розовый → чёрный через BlobDivider.
+import BlobDivider from './BlobDivider.astro';
+import PhotoFrame from './PhotoFrame.astro';
+import Tag from './Tag.astro';
+import Starburst from './Starburst.astro';
+import { services } from '../data/site';
+import { url } from '../lib/url';
+
+// TODO: заменить — фото процесса (скетчи, печать, рабочий стол)
+const strip = [
+  { src: '/images/process-01.svg', alt: 'Процесс: скетчи на столе', ratio: 4 / 5, rotate: -4, gray: false, parallax: 0.15 },
+  { src: '/images/process-02.svg', alt: 'Процесс: пробная печать, чёрно-белое фото', ratio: 4 / 3, rotate: 3, gray: true, parallax: 0.35 },
+  { src: '/images/process-03.svg', alt: 'Процесс: разметка макета', ratio: 4 / 5, rotate: -9, gray: false, parallax: 0.25 },
+];
+---
+<section class="alsodo" id="services" aria-labelledby="alsodo-title">
+  <BlobDivider top="pink" bottom="black" />
+  <div class="section section--black grain alsodo__body">
+    <div class="grid alsodo__grid">
+      <div class="alsodo__strip" aria-label="Фото процесса">
+        {strip.map((p, i) => (
+          <div class={`alsodo__shot alsodo__shot--${i + 1}`} data-parallax={p.parallax}>
+            <PhotoFrame src={p.src} alt={p.alt} ratio={p.ratio} rotate={p.rotate} gray={p.gray} />
+          </div>
+        ))}
+        <Starburst size={64} seed={31} class="alsodo__star alsodo__star--a" />
+      </div>
+
+      <div class="alsodo__content">
+        <p class="micro alsodo__kicker">: УСЛУГИ</p>
+        <h2 class="h alsodo__title" id="alsodo-title" data-reveal>ЗДЕСЬ ТАКЖЕ ДЕЛАЮ</h2>
+
+        <ul class="alsodo__list">
+          {services.map((s, i) => (
+            <li class="alsodo__item" data-reveal={String(i * 0.06)}>
+              <span class="alsodo__num micro micro--sm" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="alsodo__name">{s.title}</h3>
+              <span class="alsodo__tags">
+                {s.tags.map((t, j) => (
+                  <>
+                    {j > 0 && <span class="alsodo__sep micro" aria-hidden="true">:</span>}
+                    <Tag variant="white" rotate={j % 2 ? 2 : -2}>{t}</Tag>
+                  </>
+                ))}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="alsodo__cta">
+          <a class="alsodo__order" href={url('/#contacts')} data-reveal>ЗАКАЗАТЬ</a>
+          <p class="micro alsodo__hint">: ОТВЕЧАЮ В ТЕЧЕНИЕ ДНЯ</p>
+          <Starburst size={48} seed={58} class="alsodo__star alsodo__star--b" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .alsodo { position: relative; background: var(--black); }
+  .alsodo__body { padding-top: clamp(32px, 5vw, 72px); }
+  .alsodo__grid { position: relative; z-index: 1; align-items: start; row-gap: 48px; }
+
+  /* ---- Лента фото ---- */
+  .alsodo__strip {
+    grid-column: 1 / span 5;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .alsodo__shot { position: relative; width: 74%; }
+  .alsodo__shot--1 { margin-left: 4%; z-index: 2; }
+  .alsodo__shot--2 { margin-left: 22%; margin-top: -18%; width: 78%; z-index: 3; }
+  .alsodo__shot--3 { margin-left: 0; margin-top: -10%; width: 62%; z-index: 1; }
+  .alsodo__star { position: absolute; z-index: 4; }
+  .alsodo__star--a { right: 2%; top: 30%; }
+
+  /* ---- Контент ---- */
+  .alsodo__content { grid-column: 7 / span 6; position: relative; }
+  .alsodo__kicker { color: var(--pink); margin-bottom: 14px; }
+  .alsodo__title { color: var(--white); margin-bottom: clamp(24px, 3vw, 40px); }
+
+  .alsodo__list { border-top: 1px solid rgb(255 255 255 / 0.25); }
+  .alsodo__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 14px;
+    row-gap: 10px;
+    align-items: baseline;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.25);
+  }
+  .alsodo__num { color: var(--pink); }
+  .alsodo__name {
+    font-family: var(--font-head);
+    font-weight: 400;
+    font-size: var(--fs-h-sm);
+    line-height: var(--lh-h);
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .alsodo__tags {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+  }
+  .alsodo__tags :global(.tag) { font-size: 12px; padding: 5px 8px 4px; text-transform: lowercase; }
+  .alsodo__sep { color: var(--pink); }
+
+  .alsodo__cta { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; margin-top: 36px; }
+  .alsodo__order {
+    display: inline-block;
+    background: var(--ice);
+    color: var(--black);
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: 14px 28px 12px;
+    border-radius: 6px;
+    rotate: -2deg;
+    transition: rotate var(--t-mid) var(--ease-spring), translate var(--t-mid) var(--ease-spring);
+  }
+  .alsodo__order:hover { rotate: 1deg; translate: 0 -3px; }
+  .alsodo__order:focus-visible { outline-color: var(--ice); }
+  .alsodo__hint { color: var(--white); }
+  .alsodo__star--b { position: relative; }
+
+  /* ---- Планшет ---- */
+  @media (max-width: 900px) {
+    .alsodo__strip { grid-column: 1 / span 5; }
+    .alsodo__content { grid-column: 6 / span 7; }
+  }
+
+  /* ---- Мобильный: колонка, лента горизонтально ---- */
+  @media (max-width: 680px) {
+    .alsodo__strip,
+    .alsodo__content { grid-column: 1 / -1; }
+    .alsodo__strip {
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 8px 4px 0;
+    }
+    .alsodo__shot,
+    .alsodo__shot--1,
+    .alsodo__shot--2,
+    .alsodo__shot--3 { width: 34%; margin: 0; }
+    .alsodo__shot--2 { width: 40%; margin-left: -5%; margin-top: 22px; }
+    .alsodo__shot--3 { margin-left: -5%; margin-top: 6px; }
+    /* 34 + (40−5) + (34−5) = 98% — без вылета за край */
+    .alsodo__star--a { right: 0; top: -14px; }
+    .alsodo__item { column-gap: 10px; }
+  }
+</style>

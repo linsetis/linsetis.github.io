@@ -1,0 +1,80 @@
+---
+import Nav from './Nav.astro';
+import PuffyLogo from './PuffyLogo.astro';
+import ArrowButton from './ArrowButton.astro';
+import Starburst from './Starburst.astro';
+import { site } from '../data/site';
+---
+<header class="section section--pink hero grain" id="top">
+  <Nav />
+
+  <div class="hero__top">
+    <ul class="hero__words micro" aria-label="Девиз">
+      {site.heroWords.map((w, i) => (
+        <li>{i > 0 && <span class="hero__slash" aria-hidden="true">/</span>}{w}</li>
+      ))}
+    </ul>
+    <p class="hero__title h" data-reveal>
+      ГРАФИЧЕСКИЙ ДИЗАЙНЕР<br />НОВОГО ФОРМАТА
+    </p>
+  </div>
+
+  <div class="hero__logo">
+    <PuffyLogo tag="h1" text="FOMENKO" label="Никита Фоменко — FOMENKO" />
+    <span class="hero__star hero__star--a" data-parallax="0.35"><Starburst size={96} seed={4} /></span>
+    <span class="hero__star hero__star--b" data-parallax="0.6"><Starburst size={52} seed={12} /></span>
+    <span class="hero__star hero__star--c" data-parallax="0.2"><Starburst size={40} seed={19} stroke={false} /></span>
+  </div>
+
+  <ul class="hero__skills micro">
+    {site.heroSkills.map((s, i) => (
+      <li><span class="hero__num">0{i + 1}</span> : {s}</li>
+    ))}
+  </ul>
+
+  <div class="hero__cta" data-reveal>
+    <ArrowButton href="/#contacts" label="НАПИСАТЬ МНЕ" />
+  </div>
+</header>
+
+<style>
+  .hero { padding-top: clamp(20px, 3vw, 36px); padding-bottom: clamp(28px, 4vw, 48px); }
+  .hero > * { position: relative; z-index: 1; }
+  .hero > :global(.nav) { z-index: 5; }
+
+  .hero__top {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
+    align-items: end; margin-top: clamp(28px, 6vw, 72px);
+  }
+  .hero__words {
+    grid-column: 1 / 7; display: flex; flex-wrap: wrap; gap: 6px 0;
+    padding-bottom: 6px;
+  }
+  .hero__words li { display: flex; }
+  .hero__slash { margin: 0 clamp(8px, 1.6vw, 22px); }
+  .hero__title { grid-column: 7 / 13; text-align: right; rotate: -1deg; }
+
+  .hero__logo { margin-top: clamp(28px, 4vw, 52px); position: relative; }
+  .hero__star { position: absolute; z-index: 2; pointer-events: none; }
+  .hero__star :global(.starburst) { pointer-events: auto; }
+  .hero__star--a { right: -2%; top: -14%; }
+  .hero__star--b { left: 30%; bottom: -16%; }
+  .hero__star--c { left: -1%; top: 8%; }
+
+  .hero__skills {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap);
+    margin-top: clamp(28px, 4vw, 48px); padding-top: 10px; border-top: 1px solid var(--black);
+  }
+  .hero__num { display: inline-block; border: 1px solid var(--black); border-radius: 50%; padding: 1px 5px; margin-right: 2px; }
+
+  .hero__cta { margin-top: clamp(28px, 4vw, 48px); }
+
+  @media (max-width: 767px) {
+    .hero__top { grid-template-columns: 1fr; row-gap: 20px; margin-top: 28px; }
+    .hero__words, .hero__title { grid-column: 1 / -1; }
+    .hero__title { text-align: left; }
+    .hero__skills { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 10px; }
+    .hero__star--a { right: 0; top: -36%; }
+    .hero__star--a :global(.starburst) { --sb: 60px !important; }
+  }
+</style>

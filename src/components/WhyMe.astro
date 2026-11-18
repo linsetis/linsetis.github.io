@@ -1,0 +1,130 @@
+---
+// Секция 3 «ПОЧЕМУ Я» (розовая): 4 пункта зигзагом, соединённые CurvePath.
+import Sticker from './Sticker.astro';
+import Tag from './Tag.astro';
+import Starburst from './Starburst.astro';
+import CurvePath from './CurvePath.astro';
+import { reasons } from '../data/site';
+
+// Наклоны и параметры стикеров для каждого пункта (по порядку)
+const look = [
+  { sticker: -6, tag: -3, width: 190, parallax: 0.25 },
+  { sticker: 5, tag: 2, width: 170, parallax: 0.15 },
+  { sticker: -3, tag: -2, width: 170, parallax: 0.3 },
+  { sticker: 4, tag: 3, width: 120, parallax: 0.2 },
+];
+---
+<section class="section section--pink grain why" id="why" aria-labelledby="why-title">
+  <h2 class="h h-split why__title" id="why-title" data-reveal>
+    <span>Почему</span>
+    <span class="h-split__fill" aria-hidden="true"></span>
+    <span>Я</span>
+  </h2>
+  <p class="micro why__lead" data-reveal="0.1">: четыре причины написать именно мне</p>
+
+  <ol class="why__list grid" data-curve-root>
+    <CurvePath />
+
+    {reasons.map((r, i) => {
+      const l = look[i] ?? look[0];
+      return (
+        <li class={`why__item why__item--${i + 1}`}>
+          <div class="why__sticker" data-parallax={l.parallax}>
+            <Sticker src={r.sticker} alt={r.alt} rotate={l.sticker} width={l.width} />
+          </div>
+          <div class="why__body" data-reveal={(i * 0.05).toFixed(2)}>
+            <span class="why__num micro" data-curve-node aria-hidden="true">{i + 1}</span>
+            <h3 class="why__tag"><Tag variant={i % 2 ? 'black' : 'white'} rotate={l.tag}>{r.title}</Tag></h3>
+            <p class="micro why__text">: {r.text}</p>
+          </div>
+        </li>
+      );
+    })}
+
+    <Starburst class="why__star why__star--a" size={150} seed={21} />
+    <Starburst class="why__star why__star--b" size={96} seed={34} />
+    <Starburst class="why__star why__star--c" size={128} seed={55} />
+    <Starburst class="why__star why__star--d" size={54} seed={89} />
+  </ol>
+</section>
+
+<style>
+  .why { overflow: clip; }
+  .why__title { position: relative; z-index: 1; }
+  .why__lead { margin-top: 14px; color: var(--black); position: relative; z-index: 1; }
+
+  .why__list {
+    position: relative;
+    margin-top: clamp(40px, 6vw, 80px);
+    row-gap: clamp(32px, 5vw, 56px);
+    z-index: 1;
+  }
+
+  .why__item {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.4vw, 32px);
+  }
+  .why__item--1 { grid-column: 1 / 7; }
+  .why__item--2 { grid-column: 7 / 13; flex-direction: row-reverse; margin-top: -24px; }
+  .why__item--3 { grid-column: 2 / 8; }
+  .why__item--4 { grid-column: 7 / 12; flex-direction: row-reverse; }
+
+  .why__sticker { flex: none; max-width: 48%; }
+
+  .why__body {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: start;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .why__num {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--black);
+    border-radius: 50%;
+    background: var(--pink);
+    color: var(--black);
+    font-size: 12px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .why__tag { margin: 0; font: inherit; line-height: 1; }
+  .why__tag :global(.tag) { font-size: clamp(15px, 1.3vw, 18px); padding: 8px 12px 7px; }
+
+  .why__text {
+    color: var(--black);
+    max-width: 24ch;
+    background: var(--pink);
+  }
+
+  .why__star { position: absolute; z-index: 0; }
+  .why__star--a { left: 44%; top: 6%; }
+  .why__star--b { right: 4%; top: 44%; }
+  .why__star--c { left: 0; bottom: 4%; }
+  .why__star--d { left: 52%; bottom: 30%; }
+
+  @media (max-width: 860px) {
+    .why__item--1, .why__item--3 { grid-column: 1 / 12; }
+    .why__item--2, .why__item--4 { grid-column: 2 / 13; margin-top: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .why__list { row-gap: 44px; }
+    .why__item { grid-column: 1 / -1 !important; }
+    .why__sticker { max-width: 44%; }
+    .why__item--2 .why__body, .why__item--4 .why__body { justify-items: end; text-align: right; }
+    .why__star--a { left: auto; right: 2%; top: 18%; scale: 0.6; }
+    .why__star--b { right: auto; left: 40%; top: 48%; scale: 0.66; }
+    .why__star--c { left: 2%; bottom: 22%; scale: 0.62; }
+    .why__star--d { left: auto; right: 6%; bottom: -2%; }
+  }
+</style>

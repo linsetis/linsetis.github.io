@@ -1,0 +1,155 @@
+---
+// Секция 5 «ПРОЕКТЫ»: коллаж карточек + фильтры (GSAP Flip).
+import ProjectCard from './ProjectCard.astro';
+import Starburst from './Starburst.astro';
+import { projects, categories } from '../data/projects';
+
+const years = projects.map((p) => p.year);
+const range = `${Math.min(...years)}—${Math.max(...years)}`;
+---
+<section class="section section--black grain projects" id="projects" aria-labelledby="projects-title" data-projects>
+  <header class="projects__head">
+    <h2 id="projects-title" class="h h-split projects__title" data-reveal>
+      <span>ПРОЕКТЫ</span>
+      <span class="h-split__fill" aria-hidden="true"></span>
+      <span class="projects__count">{String(projects.length).padStart(2, '0')}</span>
+    </h2>
+    <p class="micro projects__sub">: ИЗБРАННОЕ {range} · КЛИКНИ НА КАРТОЧКУ</p>
+  </header>
+
+  <ul class="grid projects__list" data-project-list>
+    {projects.map((p, i) => <ProjectCard project={p} index={i} />)}
+  </ul>
+
+  <p class="micro projects__empty" data-projects-empty hidden>: ЗДЕСЬ ПОКА ПУСТО — СКОРО ДОБАВЛЮ</p>
+
+  <div class="projects__filters" role="group" aria-label="Фильтр проектов по категориям">
+    {categories.map((c, i) => (
+      <button
+        type="button"
+        class="ftab"
+        data-filter={c.id}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+      >{c.label}</button>
+    ))}
+    <Starburst class="projects__fstar" size={44} seed={61} />
+  </div>
+</section>
+
+<style>
+  .projects { color: var(--white); }
+  .projects__head {
+    position: relative;
+    z-index: 1;
+    margin-bottom: clamp(40px, 6vw, 80px);
+  }
+  .projects__title { color: var(--white); }
+  .projects__count { color: var(--pink); }
+  .projects__sub { color: var(--pink); margin-top: 12px; }
+
+  .projects__list {
+    position: relative;
+    z-index: 1;
+    row-gap: 0;
+    padding-inline: clamp(0px, 4vw, 56px);
+  }
+
+  .projects__empty { color: var(--pink); margin-top: 24px; }
+
+  .projects__filters {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    margin-top: clamp(56px, 8vw, 104px);
+  }
+  .ftab {
+    appearance: none;
+    border: 1px solid var(--pink);
+    background: var(--pink);
+    color: var(--black);
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 9px 14px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: rotate var(--t-fast) var(--ease-spring), translate var(--t-fast) var(--ease-spring), background var(--t-fast), color var(--t-fast);
+  }
+  .ftab:first-child { rotate: -5deg; }
+  .ftab:hover { translate: 0 -3px; }
+  .ftab[aria-pressed='true'] {
+    background: var(--white);
+    border-color: var(--white);
+    color: var(--black);
+    box-shadow: 4px 4px 0 var(--ice);
+  }
+  .ftab:focus-visible { outline-color: var(--ice); }
+  .projects__filters :global(.projects__fstar) { margin-left: 4px; }
+
+  @media (max-width: 720px) {
+    .projects__list { padding-inline: 0; }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { Flip } from 'gsap/Flip';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(Flip, ScrollTrigger);
+
+  const root = document.querySelector<HTMLElement>('[data-projects]');
+  if (root) {
+    const items = [...root.querySelectorAll<HTMLElement>('[data-project]')];
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const empty = root.querySelector<HTMLElement>('[data-projects-empty]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const relayout = () => {
+      let i = 0;
+      items.forEach((el) => {
+        if (!el.hidden) el.dataset.pos = String(i++ % 4);
+      });
+      if (empty) empty.hidden = i > 0;
+    };
+
+    const apply = (filter: string) => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+      const state = Flip.getState(items, { props: 'opacity' });
+
+      items.forEach((el) => {
+        const cats = (el.dataset.categories ?? '').split(' ');
+        el.hidden = !(filter === 'all' || cats.includes(filter));
+      });
+      relayout();
+
+      if (reduce.matches) {
+        ScrollTrigger.refresh();
+        return;
+      }
+      Flip.from(state, {
+        duration: 0.7,
+        ease: 'power3.inOut',
+        absolute: true,
+        nested: true,
+        onEnter: (els) =>
+          gsap.fromTo(els, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.6)', clearProps: 'scale' }),
+        onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.4, ease: 'power2.in' }),
+        onComplete: () => ScrollTrigger.refresh(),
+      });
+    };
+
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        if (b.getAttribute('aria-pressed') === 'true') return;
+        apply(b.dataset.filter ?? 'all');
+      }),
+    );
+  }
+</script>
