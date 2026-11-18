@@ -1,0 +1,26 @@
+{
+  "name": "linsetis-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "placeholders": "node scripts/gen-placeholders.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/sitemap": "^3.7.6",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/oswald": "^5.3.0",
+    "@fontsource/rubik-mono-one": "^5.3.0",
+    "astro": "^7.4.13",
+    "gsap": "^3.15.1",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
+  }
+}
