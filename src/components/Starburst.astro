@@ -1,0 +1,29 @@
+---
+import { starburstPath } from '../lib/starburst';
+interface Props {
+  size?: number;        // px, 40–160
+  seed?: number;
+  rays?: number;
+  stroke?: boolean;     // тонкая чёрная обводка
+  spin?: boolean;       // медленное вращение 40s
+  class?: string;
+  style?: string;
+  decorative?: boolean;
+}
+const { size = 80, seed = 1, rays, stroke = true, spin = true, class: cls = '', style = '', decorative = true } = Astro.props;
+const d = starburstPath(seed, rays);
+---
+<span class:list={['starburst', { 'starburst--spin': spin }, cls]} style={`--sb:${size}px;${style}`} aria-hidden={decorative ? 'true' : undefined}>
+  <svg viewBox="-52 -52 104 104" width={size} height={size}>
+    <path d={d} fill="var(--ice)" stroke={stroke ? 'var(--black)' : 'none'} stroke-width={stroke ? 1.6 : 0} stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+  </svg>
+</span>
+<style>
+  .starburst { display: inline-block; width: var(--sb); height: var(--sb); flex: none; pointer-events: auto; }
+  .starburst svg { width: 100%; height: 100%; overflow: visible; }
+  .starburst--spin svg { animation: sb-spin 40s linear infinite; }
+  .starburst:hover svg path { animation: sb-pulse 0.9s var(--ease-spring) infinite; transform-origin: center; transform-box: fill-box; }
+  @keyframes sb-spin { to { rotate: 360deg; } }
+  @keyframes sb-pulse { 0%,100% { scale: 1; } 50% { scale: 1.14; } }
+  @media (prefers-reduced-motion: reduce) { .starburst svg, .starburst:hover svg path { animation: none; } }
+</style>

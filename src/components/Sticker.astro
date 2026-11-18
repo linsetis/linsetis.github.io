@@ -1,0 +1,21 @@
+---
+import { url } from '../lib/url';
+interface Props { src: string; alt: string; rotate?: number; width?: number; class?: string; style?: string; }
+const { src, alt, rotate = 0, width = 180, class: cls = '', style = '' } = Astro.props;
+---
+<div class:list={['sticker', cls]} style={`--r:${rotate}deg;--w:${width}px;${style}`}>
+  <img src={url(src)} alt={alt} width={width} loading="lazy" decoding="async" />
+</div>
+<style>
+  .sticker { width: min(var(--w), 100%); rotate: var(--r); }
+  .sticker img {
+    width: 100%; height: auto;
+    filter:
+      drop-shadow(3px 0 0 var(--white)) drop-shadow(-3px 0 0 var(--white))
+      drop-shadow(0 3px 0 var(--white)) drop-shadow(0 -3px 0 var(--white))
+      drop-shadow(3px 0 0 var(--white)) drop-shadow(-3px 0 0 var(--white))
+      drop-shadow(0 8px 10px rgb(14 14 14 / 0.25));
+  }
+  .sticker:hover img { animation: wobble 0.7s ease-in-out; }
+  @keyframes wobble { 0%,100% { rotate: 0deg; } 25% { rotate: -4deg; } 60% { rotate: 3deg; } }
+</style>

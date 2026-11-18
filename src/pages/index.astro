@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import WhyMe from '../components/WhyMe.astro';
+import AlsoDo from '../components/AlsoDo.astro';
+import Projects from '../components/Projects.astro';
+import Contacts from '../components/Contacts.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout>
+  <Hero />
+  <main id="main">
+    <About />
+    <WhyMe />
+    <AlsoDo />
+    <Projects />
+    <Contacts />
+  </main>
+  <Footer />
+</BaseLayout>

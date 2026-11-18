@@ -1,0 +1,29 @@
+---
+import { url } from '../lib/url';
+interface Props { href: string; label: string; class?: string; }
+const { href, label, class: cls = '' } = Astro.props;
+---
+<a class:list={['arrowbtn', cls]} href={url(href)}>
+  <span class="arrowbtn__line arrowbtn__line--l" aria-hidden="true"></span>
+  <span class="arrowbtn__txt">{label}</span>
+  <span class="arrowbtn__line arrowbtn__line--r" aria-hidden="true"></span>
+</a>
+<style>
+  .arrowbtn {
+    display: flex; align-items: center; gap: clamp(10px, 2vw, 28px);
+    width: 100%; padding: 22px clamp(12px, 2vw, 20px);
+    background: var(--black); color: var(--pink); text-decoration: none;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    border-radius: 6px;
+    transition: padding var(--t-mid) var(--ease-out), gap var(--t-mid) var(--ease-out);
+  }
+  .arrowbtn__txt { white-space: nowrap; }
+  .arrowbtn__line { position: relative; flex: 1; height: 1px; background: currentColor; }
+  .arrowbtn__line::after {
+    content: ''; position: absolute; top: -4px; width: 8px; height: 8px;
+    border-top: 1px solid currentColor; border-right: 1px solid currentColor;
+  }
+  .arrowbtn__line--l::after { right: 0; rotate: 45deg; }
+  .arrowbtn__line--r::after { left: 0; rotate: -135deg; }
+  .arrowbtn:hover { padding-inline: clamp(40px, 12vw, 160px); gap: 10px; }
+</style>

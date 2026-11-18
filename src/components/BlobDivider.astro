@@ -1,0 +1,14 @@
+---
+// Органичная «затекающая» граница: верхний цвет стекает каплями в нижний.
+interface Props { top?: 'pink' | 'black'; bottom?: 'pink' | 'black'; class?: string; }
+const { top = 'pink', bottom = 'black', class: cls = '' } = Astro.props;
+---
+<div class:list={['blob', cls]} style={`--top:var(--${top});--bottom:var(--${bottom})`} aria-hidden="true">
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="xMidYMin slice">
+    <path fill="var(--top)" d="M0 0H1200V34C1170 36 1150 30 1132 44 1112 60 1122 92 1100 96 1078 100 1082 62 1060 50 1032 36 990 52 962 46 930 40 918 30 892 40 870 50 878 104 852 110 826 116 834 70 816 56 794 40 760 58 730 52 700 46 690 32 660 38 634 44 640 74 620 78 600 82 604 52 584 44 556 34 520 54 490 48 452 40 446 26 414 34 384 42 396 112 366 116 338 120 350 66 330 52 306 36 270 56 240 50 210 44 200 30 172 36 146 42 156 80 134 84 112 88 118 52 98 42 70 28 40 44 0 36Z"/>
+  </svg>
+</div>
+<style>
+  .blob { position: relative; background: var(--bottom); line-height: 0; margin-top: -1px; }
+  .blob svg { width: 100%; height: clamp(56px, 10vw, 120px); }
+</style>

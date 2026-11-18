@@ -1,0 +1,17 @@
+---
+interface Props { variant?: 'white' | 'black'; rotate?: number; as?: 'span' | 'a' | 'li'; href?: string; class?: string; }
+const { variant = 'white', rotate = -2, as: El = 'span', href, class: cls = '' } = Astro.props;
+---
+<El class:list={['tag', `tag--${variant}`, cls]} style={`--r:${rotate}deg`} href={href}><slot /></El>
+<style>
+  .tag {
+    display: inline-flex; align-items: center; gap: 0.4em;
+    font-family: var(--font-head); font-weight: 500; font-size: 14px; line-height: 1;
+    text-transform: uppercase; letter-spacing: 0.03em; text-decoration: none;
+    padding: 6px 10px 5px; rotate: var(--r); white-space: nowrap;
+  }
+  .tag--white { background: var(--white); color: var(--black); border: 1px solid var(--black); }
+  .tag--black { background: var(--black); color: var(--white); border: 1px solid var(--black); }
+  a.tag { transition: rotate var(--t-fast) var(--ease-spring), translate var(--t-fast); }
+  a.tag:hover { rotate: 0deg; translate: 0 -2px; }
+</style>

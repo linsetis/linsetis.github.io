@@ -1,0 +1,43 @@
+---
+import { url } from '../lib/url';
+interface Props {
+  src: string;
+  alt: string;
+  rotate?: number;      // −5…+5
+  gray?: boolean;
+  ratio?: number;       // ширина/высота
+  caption?: string;
+  class?: string;
+  style?: string;
+  loading?: 'lazy' | 'eager';
+  hover?: boolean;
+}
+const { src, alt, rotate = 0, gray = false, ratio = 4 / 3, caption, class: cls = '', style = '', loading = 'lazy', hover = true } = Astro.props;
+const w = 1200;
+const h = Math.round(w / ratio);
+---
+<figure class:list={['photo', { 'photo--gray': gray, 'photo--hover': hover }, cls]} style={`--r:${rotate}deg;${style}`}>
+  <div class="photo__img" style={`aspect-ratio:${ratio}`}>
+    <img src={url(src)} alt={alt} width={w} height={h} loading={loading} decoding="async" />
+  </div>
+  {caption && <figcaption class="photo__cap micro micro--sm">{caption}</figcaption>}
+</figure>
+<style>
+  .photo {
+    position: relative;
+    background: var(--white);
+    padding: 7px;
+    rotate: var(--r);
+    box-shadow: 0 14px 28px -16px rgb(14 14 14 / 0.6);
+    transition: rotate var(--t-mid) var(--ease-spring), translate var(--t-mid) var(--ease-spring), box-shadow var(--t-mid);
+  }
+  .photo--hover:hover { rotate: 0deg; translate: 0 -6px; box-shadow: 0 22px 36px -18px rgb(14 14 14 / 0.65); }
+  .photo__img { position: relative; overflow: hidden; background: var(--black); }
+  .photo__img img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.04) saturate(0.86) brightness(1.02); }
+  .photo--gray .photo__img img { filter: grayscale(1) contrast(1.1); }
+  .photo__img::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: var(--noise-dark); background-size: 140px; opacity: 0.18; mix-blend-mode: multiply;
+  }
+  .photo__cap { color: var(--black); padding: 8px 2px 1px; }
+</style>

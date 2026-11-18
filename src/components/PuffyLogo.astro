@@ -1,0 +1,48 @@
+---
+// «Надутое» слово: Rubik Mono One + goo-фильтр, поверх — тонкая розовая линия с петлями.
+import { loopPath } from '../lib/starburst';
+interface Props { text?: string; marks?: boolean; tag?: 'h1' | 'h2' | 'p' | 'div'; label?: string; class?: string; line?: 'pink' | 'ice' | 'white'; }
+const { text = 'FOMENKO', marks = true, tag: Tag = 'div', label, class: cls = '', line = 'pink' } = Astro.props;
+const id = 'goo-' + Array.from(text).reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7).toString(36);
+const W = 1000;
+const len = Array.from(text).length;
+const fs = Math.min(((W - 40) / 1.3) / (len * 0.86), 300);
+const H = Math.round(fs * 1.05 + 60);
+const base = H / 2 + fs * 0.36;
+const loops = Math.max(3, Math.round(len * 1.2));
+const d = loopPath(30, W - 30, H / 2, loops, fs * 0.32, len * 7);
+---
+<Tag class:list={['puffy', cls]} data-puffy aria-label={label ?? text} role={Tag === 'div' ? 'img' : undefined}>
+  <svg viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+    <defs>
+      <filter id={id} x="-10%" y="-40%" width="120%" height="180%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+        <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -12" />
+      </filter>
+    </defs>
+    <g class="puffy__blob" filter={`url(#${id})`}>
+      <text x="20" y={base} textLength={W - 40} lengthAdjust="spacingAndGlyphs" font-size={fs}
+        fill="var(--black)" stroke="var(--black)" stroke-width="14" stroke-linejoin="round">{text}</text>
+    </g>
+    <g class="puffy__ink" fill="none" stroke={`var(--${line})`} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <text x="20" y={base} textLength={W - 40} lengthAdjust="spacingAndGlyphs" font-size={fs} class="puffy__outline" vector-effect="non-scaling-stroke">{text}</text>
+      <path d={d} class="puffy__loop" pathLength="1" vector-effect="non-scaling-stroke" />
+    </g>
+  </svg>
+  {marks && (
+    <span class="puffy__marks micro micro--sm" aria-hidden="true">
+      <span style="left:0;top:-6px">N</span>
+      <span style="left:31%;bottom:-8px">F</span>
+      <span style="right:24%;top:-6px">K</span>
+      <span style="right:0;bottom:-8px">O</span>
+    </span>
+  )}
+</Tag>
+<style>
+  .puffy { position: relative; display: block; width: 100%; margin: 0; font-family: var(--font-puffy); font-weight: 400; line-height: 0; }
+  .puffy svg { width: 100%; height: auto; overflow: visible; }
+  .puffy text { font-family: var(--font-puffy); }
+  .puffy__blob { transform-origin: 50% 50%; transform-box: fill-box; }
+  .puffy__marks { position: absolute; inset: 0; pointer-events: none; line-height: 1; }
+  .puffy__marks span { position: absolute; padding: 0 3px; border: 1px solid currentColor; }
+</style>
