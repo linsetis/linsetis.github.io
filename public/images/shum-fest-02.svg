@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- TODO: заменить — заглушка, положите вместо неё настоящее фото (jpg/webp) и поправьте путь в src/data -->
+  <defs><pattern id="p" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M0 0V22" stroke="#F6B8DA" stroke-width="1" opacity=".14"/></pattern></defs>
+  <rect width="1200" height="900" fill="#0E0E0E"/>
+  <rect width="1200" height="900" fill="url(#p)"/>
+  <path d="M216 558 C 120 270, 540 108, 744 270 S 1140 495.00000000000006, 840 702 S 312 828, 216 558 Z" fill="none" stroke="#F6B8DA" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/><path d="M-18.48 -25.55L-3.09 -9.57L0.80 -36.05L3.47 -8.87L26.31 -33.22L9.01 -6.32L24.89 -8.37L10.63 0.26L29.88 7.52L6.05 4.27L25.63 37.20L2.28 9.74L1.13 46.99L-2.49 7.62L-22.97 32.85L-5.29 3.76L-40.39 7.95L-6.92 -0.72L-37.68 -13.77L-6.77 -4.93Z" transform="translate(206 540) scale(1.26)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.79" opacity=".9"/><path d="M-22.27 40.22L-6.69 7.13L-39.71 17.20L-10.13 0.61L-35.30 -9.46L-5.40 -3.96L-18.45 -25.05L-1.90 -6.60L2.18 -38.77L4.87 -8.56L20.43 -23.28L7.24 -4.06L43.23 -5.78L10.19 2.20L36.84 29.18L5.61 6.87L11.39 34.54L-0.87 6.28Z" transform="translate(439 255) scale(1.68)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.59" opacity=".9"/><path d="M41.70 21.68L7.70 6.06L16.11 25.99L2.02 8.61L-4.05 26.42L-4.42 8.74L-24.28 26.58L-5.19 3.35L-45.45 6.40L-10.03 -0.45L-26.27 -11.97L-5.30 -4.08L-15.03 -30.83L-2.24 -9.96L7.52 -43.33L3.14 -8.14L26.25 -29.94L9.74 -5.30L35.30 -5.18L7.68 1.05Z" transform="translate(1014 673) scale(2.09)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.48" opacity=".9"/>
+  <path d="M28 58V28H58" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M1172 58V28H1142" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M28 842V872H58" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M1172 842V872H1142" fill="none" stroke="#F6B8DA" stroke-width="2"/>
+  <g font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" fill="#F6B8DA" text-anchor="middle">
+    <rect x="84.80000000000007" y="362.6" width="1030.3999999999999" height="138" fill="#0E0E0E"/>
+    <text x="600" y="450" font-size="92" font-weight="500" letter-spacing="1">ФОТО ПРОЕКТА 02</text>
+    <text x="600" y="555.8" font-size="33" letter-spacing="1">ШУМ ФЕСТ · 1200×900 · ЗАМЕНИТЬ</text>
+  </g>
+</svg>

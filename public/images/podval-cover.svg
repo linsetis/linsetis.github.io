@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- TODO: заменить — заглушка, положите вместо неё настоящее фото (jpg/webp) и поправьте путь в src/data -->
+  <defs><pattern id="p" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M0 0V22" stroke="#F6B8DA" stroke-width="1" opacity=".14"/></pattern></defs>
+  <rect width="1200" height="900" fill="#0E0E0E"/>
+  <rect width="1200" height="900" fill="url(#p)"/>
+  <path d="M216 558 C 120 270, 540 108, 744 270 S 1140 495.00000000000006, 840 702 S 312 828, 216 558 Z" fill="none" stroke="#F6B8DA" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/><path d="M-15.92 44.22L-6.89 8.33L-29.69 17.15L-8.78 0.11L-39.62 -20.22L-8.68 -7.07L-10.13 -25.17L-0.35 -9.89L12.75 -25.10L6.08 -7.21L30.77 -9.40L8.87 -0.26L34.11 11.18L4.60 4.22L11.48 29.69L0.24 8.00Z" transform="translate(276 623) scale(2.33)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.43" opacity=".9"/><path d="M-15.60 30.61L-7.63 5.84L-24.36 6.53L-7.63 -1.36L-26.35 -12.90L-4.13 -6.20L-8.95 -36.73L0.70 -8.61L20.16 -26.10L7.34 -5.22L34.30 -5.23L8.54 0.51L23.41 15.81L6.50 8.71L5.34 46.70L-1.01 11.04Z" transform="translate(454 121) scale(1.85)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.54" opacity=".9"/><path d="M9.33 41.30L-0.73 7.33L-12.66 32.17L-7.66 6.91L-34.80 8.10L-7.36 -0.60L-38.49 -15.16L-5.70 -7.49L-12.84 -45.21L0.30 -10.89L10.09 -29.83L5.51 -4.90L37.32 -15.05L6.80 0.47L41.20 19.46L5.71 6.02Z" transform="translate(612 236) scale(2.94)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.34" opacity=".9"/>
+  <path d="M28 58V28H58" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M1172 58V28H1142" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M28 842V872H58" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M1172 842V872H1142" fill="none" stroke="#F6B8DA" stroke-width="2"/>
+  <g font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" fill="#F6B8DA" text-anchor="middle">
+    <rect x="84.80000000000007" y="362.6" width="1030.3999999999999" height="138" fill="#0E0E0E"/>
+    <text x="600" y="450" font-size="92" font-weight="500" letter-spacing="1">ОБЛОЖКА 02</text>
+    <text x="600" y="555.8" font-size="33" letter-spacing="1">ПОДВАЛ / АФИШИ · 1200×900 · ЗАМЕНИТЬ</text>
+  </g>
+</svg>

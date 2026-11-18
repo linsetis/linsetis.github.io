@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1200" width="960" height="1200">
+  <!-- TODO: заменить — заглушка, положите вместо неё настоящее фото (jpg/webp) и поправьте путь в src/data -->
+  <defs><pattern id="p" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M0 0V22" stroke="#0E0E0E" stroke-width="1" opacity=".14"/></pattern></defs>
+  <rect width="960" height="1200" fill="#BFE6EE"/>
+  <rect width="960" height="1200" fill="url(#p)"/>
+  <path d="M172.79999999999998 744 C 96 360, 432 144, 595.2 360 S 912 660, 672 936 S 249.60000000000002 1104, 172.79999999999998 744 Z" fill="none" stroke="#0E0E0E" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/><path d="M-16.98 -25.47L-2.02 -8.01L1.54 -46.97L1.94 -6.27L27.69 -33.56L7.79 -6.39L31.40 -13.29L8.98 -1.27L33.39 6.46L6.60 4.01L22.03 22.24L4.56 7.35L12.72 37.76L-0.02 7.03L-12.48 28.70L-4.40 5.31L-32.32 26.56L-6.71 2.96L-33.36 3.60L-6.01 -1.64L-32.37 -13.46L-5.45 -5.89Z" transform="translate(751 536) scale(2.97)" fill="#FFFFFF" stroke="#0E0E0E" stroke-width="0.34" opacity=".9"/><path d="M22.78 -41.11L6.13 -5.04L40.65 -13.42L11.19 0.68L30.22 13.67L5.66 6.44L12.27 29.84L-0.57 9.61L-11.19 28.19L-5.04 4.61L-23.79 9.77L-10.51 0.48L-44.74 -12.63L-4.46 -4.89L-9.46 -29.93L0.74 -10.94Z" transform="translate(231 540) scale(1.54)" fill="#FFFFFF" stroke="#0E0E0E" stroke-width="0.65" opacity=".9"/><path d="M-18.13 -25.89L-2.77 -7.60L-3.97 -46.70L2.20 -8.16L19.75 -32.87L7.51 -5.84L33.92 -18.79L6.34 -0.95L46.14 8.95L9.08 4.18L34.13 29.11L4.28 6.67L9.10 34.02L-0.28 6.33L-8.94 26.05L-4.72 7.09L-25.54 25.21L-8.92 4.50L-42.10 4.49L-7.49 -1.29L-38.38 -14.17L-4.88 -4.19Z" transform="translate(438 986) scale(2.99)" fill="#FFFFFF" stroke="#0E0E0E" stroke-width="0.33" opacity=".9"/>
+  <path d="M28 58V28H58" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M932 58V28H902" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M28 1142V1172H58" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M932 1142V1172H902" fill="none" stroke="#0E0E0E" stroke-width="2"/>
+  <g font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" fill="#0E0E0E" text-anchor="middle">
+    <rect x="65.60000000000002" y="529.7" width="828.8" height="111" fill="#BFE6EE"/>
+    <text x="480" y="600" font-size="74" font-weight="500" letter-spacing="1">ФОТО ПРОЕКТА 01</text>
+    <text x="480" y="685.1" font-size="27" letter-spacing="1">КИКС · 960×1200 · ЗАМЕНИТЬ</text>
+  </g>
+</svg>

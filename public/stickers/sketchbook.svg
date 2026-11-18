@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 260"><!-- TODO: заменить — заглушка стикера; лучше PNG/WebP с прозрачным фоном -->
+  <g transform="rotate(-8 150 130)">
+    <rect x="40" y="40" width="220" height="180" rx="10" fill="#0E0E0E"/>
+    <rect x="52" y="48" width="200" height="164" rx="6" fill="#FFFFFF"/>
+    <path d="M80 150c20-60 40-60 50-20s30 30 40-10 30-40 50 10" fill="none" stroke="#0E0E0E" stroke-width="4" stroke-linecap="round"/>
+    <path d="M90 90q30-20 60 0t60 0" fill="none" stroke="#F6B8DA" stroke-width="10" stroke-linecap="round"/>
+    <path d="M-9.59 40.13L-5.00 6.05L-27.34 23.27L-8.23 1.91L-24.98 0.19L-10.33 -2.83L-26.81 -16.61L-3.67 -5.92L-11.62 -45.54L0.78 -9.10L10.83 -37.58L3.91 -4.82L28.99 -22.12L6.87 -2.60L25.36 -2.00L7.18 2.28L35.15 25.91L4.05 6.50L6.37 24.50L0.62 10.83Z" transform="translate(210 175) scale(.38)" fill="#BFE6EE" stroke="#0E0E0E" stroke-width="3"/>
+    <rect x="60" y="30" width="8" height="26" rx="4" fill="#0E0E0E"/><rect x="85" y="30" width="8" height="26" rx="4" fill="#0E0E0E"/><rect x="110" y="30" width="8" height="26" rx="4" fill="#0E0E0E"/><rect x="135" y="30" width="8" height="26" rx="4" fill="#0E0E0E"/><rect x="160" y="30" width="8" height="26" rx="4" fill="#0E0E0E"/><rect x="185" y="30" width="8" height="26" rx="4" fill="#0E0E0E"/><rect x="210" y="30" width="8" height="26" rx="4" fill="#0E0E0E"/><rect x="235" y="30" width="8" height="26" rx="4" fill="#0E0E0E"/>
+    <text x="70" y="200" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="12" fill="#0E0E0E">СКЕТЧБУК</text>
+  </g></svg>

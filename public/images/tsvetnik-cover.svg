@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- TODO: заменить — заглушка, положите вместо неё настоящее фото (jpg/webp) и поправьте путь в src/data -->
+  <defs><pattern id="p" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M0 0V22" stroke="#0E0E0E" stroke-width="1" opacity=".14"/></pattern></defs>
+  <rect width="1200" height="900" fill="#BFE6EE"/>
+  <rect width="1200" height="900" fill="url(#p)"/>
+  <path d="M216 558 C 120 270, 540 108, 744 270 S 1140 495.00000000000006, 840 702 S 312 828, 216 558 Z" fill="none" stroke="#0E0E0E" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/><path d="M25.35 -3.99L8.97 2.07L22.88 9.51L6.90 5.43L14.54 25.91L2.99 9.21L3.76 29.94L-1.31 9.07L-16.18 41.25L-6.87 8.13L-32.19 25.05L-10.30 3.79L-38.86 -0.52L-10.36 -2.25L-41.94 -20.54L-4.61 -4.14L-25.20 -39.68L-2.54 -7.66L-4.61 -40.95L2.26 -8.84L16.31 -40.18L5.01 -5.34L28.15 -22.21L6.99 -2.64Z" transform="translate(818 532) scale(2.17)" fill="#FFFFFF" stroke="#0E0E0E" stroke-width="0.46" opacity=".9"/><path d="M-9.86 -45.95L0.54 -8.73L19.74 -39.08L6.31 -8.09L26.83 -20.78L10.77 -3.21L39.08 -0.09L8.53 2.38L21.32 12.04L5.47 5.70L18.77 37.47L1.35 6.47L-6.27 35.31L-2.79 6.48L-22.57 24.29L-7.33 5.46L-23.75 9.84L-6.60 -0.21L-22.61 -8.42L-8.52 -4.97L-21.39 -26.44L-3.88 -9.60Z" transform="translate(551 668) scale(1.11)" fill="#FFFFFF" stroke="#0E0E0E" stroke-width="0.90" opacity=".9"/><path d="M-14.36 -28.31L-0.34 -9.53L19.85 -42.60L6.18 -4.75L38.33 -9.02L8.40 0.30L28.74 11.14L6.56 7.90L6.66 27.24L0.27 6.24L-13.78 21.83L-7.05 6.23L-30.99 7.97L-9.15 -1.02L-38.47 -20.23L-5.38 -6.95Z" transform="translate(684 648) scale(1.61)" fill="#FFFFFF" stroke="#0E0E0E" stroke-width="0.62" opacity=".9"/>
+  <path d="M28 58V28H58" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M1172 58V28H1142" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M28 842V872H58" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M1172 842V872H1142" fill="none" stroke="#0E0E0E" stroke-width="2"/>
+  <g font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" fill="#0E0E0E" text-anchor="middle">
+    <rect x="84.80000000000007" y="362.6" width="1030.3999999999999" height="138" fill="#BFE6EE"/>
+    <text x="600" y="450" font-size="92" font-weight="500" letter-spacing="1">ОБЛОЖКА 06</text>
+    <text x="600" y="555.8" font-size="33" letter-spacing="1">ЦВЕТНИК · 1200×900 · ЗАМЕНИТЬ</text>
+  </g>
+</svg>

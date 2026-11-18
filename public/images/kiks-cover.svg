@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+  <!-- TODO: заменить — заглушка, положите вместо неё настоящее фото (jpg/webp) и поправьте путь в src/data -->
+  <defs><pattern id="p" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M0 0V22" stroke="#F6B8DA" stroke-width="1" opacity=".14"/></pattern></defs>
+  <rect width="1200" height="900" fill="#0E0E0E"/>
+  <rect width="1200" height="900" fill="url(#p)"/>
+  <path d="M216 558 C 120 270, 540 108, 744 270 S 1140 495.00000000000006, 840 702 S 312 828, 216 558 Z" fill="none" stroke="#F6B8DA" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/><path d="M-42.10 -11.88L-8.76 -6.70L-24.39 -26.86L-3.34 -6.56L-7.83 -39.90L0.67 -9.95L13.08 -45.14L5.41 -8.60L22.38 -18.31L7.98 -3.36L26.22 -4.62L8.99 0.57L28.58 10.55L5.86 4.00L19.79 21.62L4.52 8.99L10.35 38.50L-0.26 7.87L-9.08 24.65L-5.51 7.58L-33.31 32.55L-8.65 4.65L-38.78 5.59L-6.94 -0.80Z" transform="translate(281 322) scale(1.50)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.67" opacity=".9"/><path d="M13.61 -39.14L3.91 -7.49L36.40 -29.73L6.05 -3.75L39.79 -12.77L6.82 0.31L45.04 12.64L5.40 3.50L27.15 30.45L5.79 9.46L9.69 37.98L-0.04 7.75L-8.91 40.17L-3.11 5.51L-26.80 30.13L-8.03 4.44L-43.68 15.32L-7.71 0.24L-42.63 -9.33L-5.67 -3.23L-24.93 -23.26L-5.32 -8.93L-10.02 -42.56L0.39 -8.11Z" transform="translate(497 345) scale(1.57)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.64" opacity=".9"/><path d="M-26.36 38.20L-8.54 5.87L-40.96 5.71L-8.61 -1.44L-35.50 -18.86L-6.23 -7.16L-6.40 -46.56L1.33 -9.75L14.44 -34.77L8.05 -6.53L42.02 -7.20L7.34 0.56L30.55 19.52L4.86 6.38L5.14 38.33L-1.02 9.31Z" transform="translate(438 277) scale(1.79)" fill="#BFE6EE" stroke="#F6B8DA" stroke-width="0.56" opacity=".9"/>
+  <path d="M28 58V28H58" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M1172 58V28H1142" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M28 842V872H58" fill="none" stroke="#F6B8DA" stroke-width="2"/><path d="M1172 842V872H1142" fill="none" stroke="#F6B8DA" stroke-width="2"/>
+  <g font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" fill="#F6B8DA" text-anchor="middle">
+    <rect x="84.80000000000007" y="362.6" width="1030.3999999999999" height="138" fill="#0E0E0E"/>
+    <text x="600" y="450" font-size="92" font-weight="500" letter-spacing="1">ОБЛОЖКА 05</text>
+    <text x="600" y="555.8" font-size="33" letter-spacing="1">КИКС · 1200×900 · ЗАМЕНИТЬ</text>
+  </g>
+</svg>

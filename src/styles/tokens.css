@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Дизайн-токены linsetis. Других цветов нет, градиентов нет.
+   ========================================================================== */
+:root {
+  /* Цвета */
+  --pink: #f6b8da;   /* основной фон */
+  --black: #0e0e0e;  /* второй фон, текст, плашки */
+  --ice: #bfe6ee;    /* звёзды-вспышки, редкие акценты */
+  --white: #ffffff;  /* рамки фото, обводка стикеров, записки */
+  --paper: #1a1a1a;  /* внешняя подложка с зерном */
+
+  /* Шрифты */
+  --font-head: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-puffy: 'Rubik Mono One', 'Arial Black', sans-serif;
+
+  /* Типографика */
+  --fs-h: clamp(32px, 1.4rem + 2.8vw, 64px);       /* заголовки 32–64 */
+  --fs-h-sm: clamp(24px, 1rem + 1.6vw, 40px);
+  --fs-display: clamp(64px, 2rem + 9vw, 168px);    /* LINSETIS и т.п. */
+  --lh-h: 0.95;
+  --fs-micro: 11px;
+  --fs-micro-sm: 10px;
+  --ls-micro: 0.02em;
+  --fs-note: 13px;
+
+  /* Сетка */
+  --container: 1200px;
+  --radius: 12px;
+  --cols: 12;
+  --gutter: clamp(16px, 3.5vw, 48px);  /* внутренние поля секций */
+  --gap: clamp(12px, 1.6vw, 24px);     /* межколоночный зазор */
+  --outer: clamp(8px, 2vw, 28px);      /* отступ контейнера от краёв окна */
+  --section-y: clamp(56px, 8vw, 120px);
+
+  /* Движение */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 180ms;
+  --t-mid: 420ms;
+
+  /* Зерно (SVG-шум) */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --noise-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

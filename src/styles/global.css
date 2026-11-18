@@ -1,0 +1,166 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: clip;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+  background-color: var(--paper);
+  background-image: var(--noise);
+  background-size: 180px;
+  background-blend-mode: soft-light;
+  color: var(--black);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  padding: var(--outer);
+}
+
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection { background: var(--black); color: var(--pink); }
+
+/* ---------- Контейнер-«разворот» на тёмной подложке ---------- */
+.sheet {
+  position: relative;
+  max-width: var(--container);
+  margin-inline: auto;
+  border-radius: var(--radius);
+  overflow: clip;
+  background: var(--pink);
+  isolation: isolate;
+}
+
+/* ---------- Секции ---------- */
+.section {
+  position: relative;
+  padding: var(--section-y) var(--gutter);
+}
+.section--pink { background: var(--pink); color: var(--black); }
+.section--black { background: var(--black); color: var(--white); }
+
+/* ---------- 12-колоночная сетка ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gap);
+}
+
+/* ---------- Типографика ---------- */
+.h {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: var(--fs-h);
+  line-height: var(--lh-h);
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+.h--sm { font-size: var(--fs-h-sm); }
+.h--display { font-size: var(--fs-display); line-height: 0.85; }
+
+/* Заголовок «по краям»: ПОЧЕМУ ……… Я */
+.h-split {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25em;
+}
+.h-split__fill {
+  flex: 1;
+  min-width: 1em;
+  border-bottom: 2px dotted currentColor;
+  transform: translateY(-0.18em);
+}
+
+.micro {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  line-height: 1.35;
+  letter-spacing: var(--ls-micro);
+  text-transform: uppercase;
+}
+.micro--sm { font-size: var(--fs-micro-sm); }
+
+/* Карточка-записка, «напечатано на машинке» */
+.note {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-mono);
+  font-size: var(--fs-note);
+  line-height: 1.5;
+  padding: 18px 20px 20px;
+  max-width: calc(22ch + 40px);
+  box-shadow: 0 10px 24px -14px rgb(14 14 14 / 0.55);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px; top: -48px;
+  z-index: 100;
+  background: var(--black);
+  color: var(--pink);
+  padding: 10px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+/* Зерно поверх секции */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--noise-dark);
+  background-size: 160px;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+.section--black.grain::after {
+  background-image: var(--noise);
+  mix-blend-mode: screen;
+  opacity: 0.06;
+}
+
+/* Скрытие до анимации появления (класс .motion ставится только если анимации разрешены) */
+.motion [data-reveal] { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

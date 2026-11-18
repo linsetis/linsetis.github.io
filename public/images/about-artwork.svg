@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <!-- TODO: заменить — заглушка, положите вместо неё настоящее фото (jpg/webp) и поправьте путь в src/data -->
+  <defs><pattern id="p" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M0 0V22" stroke="#0E0E0E" stroke-width="1" opacity=".14"/></pattern></defs>
+  <rect width="1200" height="750" fill="#F6B8DA"/>
+  <rect width="1200" height="750" fill="url(#p)"/>
+  <path d="M216 465 C 120 225, 540 90, 744 225 S 1140 412.50000000000006, 840 585 S 312 690, 216 465 Z" fill="none" stroke="#0E0E0E" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"/><path d="M-13.62 24.95L-7.22 7.51L-28.77 16.07L-7.01 1.50L-26.27 0.80L-6.93 -2.60L-37.73 -25.50L-6.28 -6.90L-11.66 -22.90L-0.96 -8.97L12.13 -45.41L4.29 -9.55L18.65 -17.19L6.51 -4.09L44.55 -6.55L6.46 0.46L41.82 18.43L5.68 3.87L19.53 20.88L3.20 8.81L2.68 45.51L-1.59 6.19Z" transform="translate(831 398) scale(1.02)" fill="#BFE6EE" stroke="#0E0E0E" stroke-width="0.98" opacity=".9"/><path d="M4.52 -41.76L2.76 -7.92L23.15 -37.60L4.77 -4.39L40.90 -17.53L6.51 -1.03L34.92 -0.48L7.69 2.41L32.12 23.41L6.60 8.14L16.36 27.10L1.62 6.18L-4.34 38.05L-1.94 6.10L-25.38 39.56L-5.62 4.98L-29.76 15.54L-10.40 2.31L-27.82 0.54L-9.26 -2.99L-36.83 -20.25L-6.36 -7.43L-16.13 -36.71L-1.83 -6.39Z" transform="translate(919 434) scale(0.96)" fill="#BFE6EE" stroke="#0E0E0E" stroke-width="1.04" opacity=".9"/><path d="M45.18 12.96L7.25 5.22L14.30 18.97L2.31 6.02L6.50 39.43L-1.37 9.83L-15.71 37.24L-6.50 7.28L-21.34 11.57L-9.44 2.22L-45.39 1.57L-8.05 -3.14L-35.74 -21.11L-4.20 -4.71L-9.23 -26.25L-1.31 -9.06L10.16 -44.90L3.78 -8.62L17.86 -23.18L6.28 -3.69L36.62 -6.38L10.62 -0.15Z" transform="translate(401 631) scale(0.91)" fill="#BFE6EE" stroke="#0E0E0E" stroke-width="1.10" opacity=".9"/>
+  <path d="M28 58V28H58" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M1172 58V28H1142" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M28 692V722H58" fill="none" stroke="#0E0E0E" stroke-width="2"/><path d="M1172 692V722H1142" fill="none" stroke="#0E0E0E" stroke-width="2"/>
+  <g font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" fill="#0E0E0E" text-anchor="middle">
+    <rect x="84.80000000000007" y="287.6" width="1030.3999999999999" height="138" fill="#F6B8DA"/>
+    <text x="600" y="375" font-size="92" font-weight="500" letter-spacing="1">РАБОТА ИЗ ПОРТФОЛИО</text>
+    <text x="600" y="480.8" font-size="33" letter-spacing="1">1200×750 · ЗАМЕНИТЬ</text>
+  </g>
+</svg>
