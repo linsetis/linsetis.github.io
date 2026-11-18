@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SITE_URL: https://nf2000006.github.io
+      SITE_URL: https://linsetis.github.io
     steps:
       - uses: actions/checkout@v4
       - uses: withastro/action@v3
